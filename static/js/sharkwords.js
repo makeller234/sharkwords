@@ -72,22 +72,25 @@ const handleCorrectGuess = letter => {
 // message. Otherwise, increment `numWrong` and update the shark image.
 //
 const handleWrongGuess = () => {
-  //numWrong = 1;
-  while (numWrong < 5) {
-    if (isLetterInWord === false) {
+//numWrong = 1;
+   if (numWrong < 5){
+    if (isLetterInWord() === false) {
       numWrong += 1;
-      $('img').attr('src', `guess${numWrong}.png`);
+      console.log(numWrong);
+      $('#shark-img img').attr('src', `/static/images/guess${numWrong}.png`);
+      
     }
     else if (isLetterInWord === true) {
       handleCorrectGuess();
     }
-    else {
-      disableLetterButton();
-      //$(`#play-again`).css('display', 'block');
-      $(`#play-again`).show();
-    }
   }
-  
+    
+    if (numWrong === 5) {
+      $("button").attr("disabled", true);
+      $('#play-again').css({display:'block'}); 
+    
+    }  
+    
 };
 
 //  Reset game state. Called before restarting the game.
